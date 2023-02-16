@@ -16,6 +16,8 @@ These are there to distinguish between the code which is for the summary landing
 
 The approximate data flow is like this:
 
-(1)
-
-(2)
+1. import the data from Access with the _prep_data_regional.R_ script
+* this is where the majority of the changes will need to be made if the raw data format is changed
+* this will not run without a pre-set _working_year_ or _previous_year_ variable 
+2. run the script to create the functions
+* note that some of these functions become relyant on other functions in this file so be sure to understand what each of them is doing if producing the accounts for the first time
