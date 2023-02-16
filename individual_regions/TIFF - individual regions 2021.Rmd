@@ -1,0 +1,360 @@
+---
+title: "TIFF in the North East (England) 2021"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output: rgovspeak::govspeak
+params:
+  region_name:
+    label: 'Select an ITL1 region'
+    input: select
+    value: 'the North East'
+    choices: ['the North East', 'the North West','Yorkshire and The Humber',
+              'the East Midlands', 'the West Midlands', 'the East of England',
+              'London and the South East', 'the South West']
+  working_year:
+    label: 'Year of TIFF'
+    value: 2021
+    input: slider
+    min: 2000
+    max: 2050
+    step: 1
+  pubdate:
+    label: 'Publication date:'
+    input: date
+    value: !r Sys.Date()
+  run:
+   label: 'Run for development, figures or markdown text'
+   input: select
+   value: 'Development'
+   choices: ['Development', 'Figures', 'Text']
+---
+
+```{r setup, include=FALSE}
+if(!require(pacman)) {
+  install.packages('pacman')
+  library(pacman)
+}
+
+#load other packages
+p_load(tidyverse, 
+       glue, 
+       fs, 
+       readxl, 
+       cli,
+       scales,
+       gridExtra,
+       knitr,
+       lubridate,
+       janitor,
+       here,
+       ggfbs,
+       xlsx)
+
+knitr::opts_chunk$set(echo = FALSE)
+
+working_year <- params$working_year
+
+previous_year <- working_year - 1
+
+pubday <- format(params$pubdate, '%d')
+pubmonth <- format(params$pubdate, '%B')
+pubyear <- format(params$pubdate, '%Y')
+publication_date <- glue('{pubday} {pubmonth} {pubyear}')
+date_pub <- format(params$pubdate,'%d%b%y') %>%
+  str_to_lower()
+
+source(here('TIFF - individual regions 2021', 'scripts', 'figure_maker_each_region.R'))
+
+all_regions <- c(ukc, ukd, uke, ukf, ukg, ukh, ukij, ukk)
+upper_case_regions <- c("UKC", "UKD", "UKE", "UKF", "UKG", "UKH", "UKIJ", "UKK")
+
+region_name <- params$region_name
+
+region_name_index_list <- c('the North East', 'the North West','Yorkshire and The Humber',
+              'the East Midlands', 'the West Midlands', 'the East of England',
+              'London and the South East', 'the South West')
+
+region_name_index <- match(region_name, region_name_index_list)
+
+region <- as_tibble(all_regions[((region_name_index*5)-4):(region_name_index*5)])
+# 1 -> 1:5 (1*5 - 4):(1*5)
+# 2 -> 6:10 (2*5 - 4):(2*5)
+# 3 -> 11:15 etc...
+
+shout_region <- upper_case_regions[region_name_index]
+
+shout_ITL_region_list <- c('TLC', 'TLD', 'TLE', 'TLF', 'TLG', 'TLH', 'TLIJ', 'TLK')
+
+shout_ITL_region <- shout_ITL_region_list[region_name_index]
+
+source(here('TIFF - individual regions 2021', 'scripts', 'key_messages_each_region.R'))
+source(here('TIFF - individual regions 2021', 'scripts', 'bullet_points_each_region.R'))
+source(here('TIFF - individual regions 2021', 'scripts', 'map_of_regions.R'))
+```
+
+#### Figure 1: A map of England with `r region_name` highlighted
+
+```{r prep for the map of england, include = FALSE}
+itl1_region_map <- itl1_map_highlight(shout_region)
+itl3_region_map <- itl3_map_highlight(shout_region)
+```
+
+``` {r 1-map_of_england}
+plot1 <- ggplot()+
+  geom_sf(data = eng_nuts1, fill = "NA", colour = "#0b0c0c", size = 0.7) +
+  geom_sf(data = itl1_region_map, fill = "#12436d", size = 0.7) +
+  theme_void()
+
+plot2 <- ggplot()+
+  geom_sf(data = itl3_region_map, fill = "#12436d", colour = "#0b0c0c", size = 1) +
+  labs(caption = ("Source: Defra \u00A9 Crown copyright")) +
+  theme_void()+
+  theme(plot.caption = element_text(size = 16, family = "GDS Transport Website"))
+
+grid.arrange(plot1, plot2, ncol = 2)
+```
+
+On the right of Figure 1 is `r region_name` with the ITL3 borders shown. ILT1 borders are shown on the full map of England on the left.
+
+## Section 1: Key messages
+
+* `r km_bullet_text(km_tiff_bullet_data, "TIFF")`
+
+* `r km_bullet_text(km_crops_bullet_data, "Total crop output")`
+
+* `r km_bullet_text(km_livestock_bullet_data, "Total livestock output")`
+
+* `r km_bullet_text(km_int_consumption_bullet_data, "Total intermediate consumption")`
+
+#### Figure 1.1: TIFF from `r working_year-5` through to `r working_year` in current prices for `r region_name`
+
+``` {r 2-TIFF_current_current_prices}
+itl1_tiff_years_function(region)
+
+tiff_past_6_years_data <- tiff_past_6_years_bullet_data(region)
+```
+
+* `r tiff_past_6_years_bullet_1(tiff_past_6_years_data)`
+
+* `r tiff_past_6_years_bullet_2(tiff_past_6_years_data)`
+
+## Section 2: Outputs and subsidies
+
+### 2.1 Overview
+
+#### Figure 2.1: Outputs and subsidies split by percentage from `r working_year-5` - `r working_year` for `r region_name`
+
+``` {r 3-Outputs_and_subsidies_accross_years}
+itl1_outputs_and_subsidies_years_function(region)
+
+outs_and_subs_itl1_data <- outs_and_subs_itl1_bullet_data(region)
+```
+
+* `r outs_and_subs_itl1_bullet_1(outs_and_subs_itl1_data)`
+
+* `r outs_and_subs_itl1_bullet_2(outs_and_subs_itl1_data)`
+
+#### Figure 2.2: Outputs and subsidies for `r working_year` at ITL2 in `r region_name`
+
+``` {r 4-Outputs_and_subsidies_itl2_current_year}
+itl2_outputs_and_subsidies_current_year_function(region)
+
+outs_and_subs_itl2_data <- outs_and_subs_itl2_bullet_data(region)
+```
+
+* `r outs_and_subs_itl2_bullet_1(outs_and_subs_itl2_data)`
+
+* `r outs_and_subs_itl2_bullet_2(outs_and_subs_itl2_data)`
+
+### 2.2 Crops
+
+#### Figure 2.3: Crop breakdown for `r working_year` at ITL1 for `r region_name` (£ million)
+
+``` {r Interactive_table1_crops_whole_region}
+itl1_crops_current_year(region)
+
+crop_itl1_bullet_data <- crops_data_each_region(region)
+```
+{barchart}
+
+* `r crop_bullet_1(crop_itl1_bullet_data)`
+
+* `r crop_livestock_bullet_2(crop_itl1_bullet_data)`
+
+* `r crop_livestock_bullet_3(crop_itl1_bullet_data)` 
+
+#### Figure 2.4: Total crop output for `r working_year` at ITL2 in `r region_name` (£ million)
+
+``` {r Interactive_table2_crops_itl2_region}
+itl2_total_crop_current_year(region)
+
+itl2_crops_bullet_data <- crops_data_itl2(region)
+```
+{barchart}
+
+* `r crop_bullet_4(itl2_crops_bullet_data)`
+
+* `r crop_bullet_5(itl2_crops_bullet_data)`
+
+$D
+[Download 'Total Income from Farming in the regions of England at ITL2' (ODS, 305KB)](ITL2 CURRENT PRICES DATASET)
+$D
+
+### 2.3 Livestock
+
+#### Figure 2.5: Livestock breakdown for `r working_year` at ITL1 for `r region_name` (£ million)
+
+``` {r Interactive_table3_livestock_whole_region}
+itl1_livestock_current_year(region)
+
+livestock_itl1_bullet_data <- livestock_data_each_region(region)
+```
+{barchart}
+
+* `r livestock_bullet_1(livestock_itl1_bullet_data)`
+
+* `r crop_livestock_bullet_2(livestock_itl1_bullet_data)`
+
+* `r crop_livestock_bullet_3(livestock_itl1_bullet_data)` 
+
+#### Figure 2.6: Total livestock output for `r working_year` at ITL2 in `r region_name` (£ million)
+
+``` {r Interactive_table4_livestock_itl2_region}
+itl2_total_livestock_current_year(region)
+
+itl2_livestock_bullet_data <- livestock_data_itl2(region)
+```
+{barchart}
+
+* `r livestock_bullet_4(itl2_livestock_bullet_data)`
+
+* `r livestock_bullet_5(itl2_livestock_bullet_data)` 
+
+$D
+[Download 'Total Income from Farming in the regions of England at ITL2' (ODS, 305KB)](ITL2 CURRENT PRICES DATASET)
+$D
+
+### 2.4 Other outputs and subsidies
+
+#### Figure 2.7: Other outputs and subsidies for `r working_year` at ITL1 for `r region_name` (£ million)
+
+``` {r Interactive_table5_other_outputs_whole_region}
+itl1_other_outputs_and_subsidies_current_year(region)
+
+other_outputs_etc_bullet_data <- other_outputs_etc_itl1(region)
+```
+{barchart}
+
+* `r other_outputs_etc_bullet_1(other_outputs_etc_bullet_data)`
+
+* `r other_outputs_etc_bullet_2(other_outputs_etc_bullet_data)` 
+
+``` {r Interactive_table_other_outputs_itl2_region}
+# other outputs for the individual itl2/3 regions
+```
+
+## Section 3: Inputs and costs
+
+### 3.1 Overview
+
+#### Figure 3.1: Inputs and costs split by percentage from `r working_year-5` - `r working_year` for `r region_name`
+
+``` {r 5-Inputs_and_costs_accross_years}
+itl1_inputs_and_costs_years_function(region)
+
+inputs_and_costs_itl1_data <- inputs_and_costs_itl1_bullet_data(region)
+```
+
+* `r inputs_and_costs_itl1_bullet_1(inputs_and_costs_itl1_data)`
+
+* `r inputs_and_costs_itl1_bullet_2(inputs_and_costs_itl1_data)`
+
+#### Figure 3.2: Inputs and costs for `r working_year` at ITL2 in `r region_name`
+
+``` {r 6-Inputs_and_costs}
+itl2_inputs_and_costs_current_year_function(region)
+
+inputs_and_costs_itl2_data <- inputs_and_costs_itl2_bullet_data(region)
+```
+
+* `r inputs_and_costs_itl2_bullet_1(inputs_and_costs_itl2_data)`
+
+* `r inputs_and_costs_itl2_bullet_2(inputs_and_costs_itl2_data)`
+
+### 3.2 Intermediate consumption
+
+#### Figure 3.3: Intermediate consumption breakdown for `r working_year` at ITL1 for `r region_name` (£ million)
+
+``` {r Interactive_table6_int_consumption_whole_region}
+itl1_intermediate_consumption_current_year(region)
+
+itl1_int_consumption_bullet_data <- int_consumption_each_region(region)
+```
+{barchart}
+
+* `r int_consumption_bullet_1(itl1_int_consumption_bullet_data)`
+
+* `r int_consumption_bullet_2(itl1_int_consumption_bullet_data)`
+
+* `r int_consumption_bullet_3(itl1_int_consumption_bullet_data)`
+
+#### Figure 3.4: Total intermediate consumption for `r working_year` at ITL2 (£ million)
+
+``` {r Interactive_table7_crops_whole_region}
+itl2_total_intermediate_consumption_current_year(region)
+
+itl2_int_consumption_bullet_data <- int_consumption_data_itl2(region)
+```
+{barchart}
+
+* `r int_consumption_bullet_4(itl2_int_consumption_bullet_data)`
+
+* `r int_consumption_bullet_5(itl2_int_consumption_bullet_data)`
+
+$D
+[Download 'Total Income from Farming in the regions of England at ITL2' (ODS, 305KB)](ITL2 CURRENT PRICES DATASET)
+$D
+
+### 3.3 Other inputs and costs
+
+#### Figure 3.5: Other inputs and costs breakdown for `r working_year` at ITL1 for `r region_name` (£ million)
+
+``` {r Interactive_table8_other_costs_whole_region}
+itl1_other_inputs_and_costs_current_year(region)
+
+other_inputs_itl1_bullet_data <- other_intputs_etc_itl1(region)
+```
+{barchart}
+
+* `r other_inputs_etc_bullet_1(other_inputs_itl1_bullet_data)`
+
+* `r other_inputs_etc_bullet_2(other_inputs_itl1_bullet_data)`
+
+``` {r Interactive_tableX_other_costs_itl2_region}
+# other inputs and costs for the individual itl2/3 regions
+```
+
+#### Link to main page
+
+[TIFF in the regions of England](LINK TO MAIN PAGE)
+
+```{r saving files, eval = params$run == 'Figures', include = FALSE}
+source(here('TIFF - individual regions 2021', 'scripts', 'saving_files_each_region.R'))
+```
+
+```{r saving the text file, eval = params$run == 'Text', include = FALSE}
+file_copy(here("TIFF - individual regions 2021", "TIFF---individual-regions-2021_govspeak.md"),
+          here("TIFF - individual regions 2021", "send to publishing",  glue("{shout_ITL_region}")))
+
+file.rename(here("TIFF - individual regions 2021", "send to publishing", glue("{shout_ITL_region}"),
+                 "TIFF---individual-regions-2021_govspeak.md"),
+            here("TIFF - individual regions 2021", "send to publishing", glue("{shout_ITL_region}"),
+                 glue("regional_tiff_{shout_ITL_region}_{date_pub}.txt")))
+
+file_copy(here("TIFF - individual regions 2021", "TIFF---individual-regions-2021.html"),
+          here("TIFF - individual regions 2021", "send to publishing", glue("{shout_ITL_region}")))
+
+file.rename(here("TIFF - individual regions 2021", "send to publishing", glue("{shout_ITL_region}"),
+                 "TIFF---individual-regions-2021.html"),
+            here("TIFF - individual regions 2021", "send to publishing", glue("{shout_ITL_region}"),
+                 glue("stats_notice_example_{shout_ITL_region}.html")))
+```
