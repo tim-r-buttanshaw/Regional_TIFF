@@ -48,9 +48,20 @@ create a set of lookup functions to be run on data sets which have a column of i
 (generic lookup and replace function lines 67 - 77 but it's not really relevant just potentially useful to create other specific ones and too many variables)
 
 #### lines 80 - 104
-**80 - 88** a function to find the 3 itl1 regions which had the highest value for a particular account item (can be input or output) in the account year <br.>
-**90 - 104** using the top three itl1 regions found above, create a table with them across the top and years going down for the last 6 years (including account year)
+**80 - 88** a function to find the 3 itl1 regions which had the highest value for a particular account item (can be input or output) in the account year <br>
+**90 - 104** using the top three itl1 regions found above, create a table with them across the top and years going down for the last 6 years (including account year) i.e. figures 2.2 and 2.3 [here](https://www.gov.uk/government/statistics/total-income-from-farming-for-the-regions-of-england/total-income-from-farming-in-the-regions-of-england-in-2021)
 
 #### lines 106 - 118
 a function to create a tibble for a specific account item over the past 2 years for each itl1 region. This can then be converted using kable into a table which gov.uk can make into an interactive barchart i.e. figures 1.1 and 1.2 [here](https://www.gov.uk/government/statistics/total-income-from-farming-for-the-regions-of-england/total-income-from-farming-in-the-regions-of-england-in-2021)
 
+#### lines 121 - 131
+a function which pivots a tibble so years are across the top, the items are arranged from largest to smallest, and the values are all rounded to 0dp
+
+#### lines 134 - 144
+a collection of functions which are always performed on a dataset when the resolution of the data in question is itl1 to produce tables such as figures 1.1 and 1.2 [here](https://www.gov.uk/government/statistics/total-income-from-farming-for-the-regions-of-england/total-income-from-farming-in-the-regions-of-england-in-2021)
+
+#### lines 146 - 156
+a collection of functions which are always performed on a dataset when the resolution of the data is itl2 to produce tables such as figures 2.4 and 2.6 [here](https://www.gov.uk/government/statistics/total-income-from-farming-for-the-regions-of-england/total-income-from-farming-in-the-north-east-of-england)
+
+#### lines 158 - 178
+a function which can be used for formatting of kables to strikethrough specified rows or make them bold or italics
