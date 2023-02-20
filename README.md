@@ -14,6 +14,7 @@ These are there to distinguish between the code which is for the summary landing
 
 To create the regional accounts if the data is in the fomrat you expect then all you need to do it to run the .Rmd files in each of the folders (making sure that the source references for the scripts are correct). I will outline below what is happening in each of the scripts and where they fit in the process of running the regional accounts.
 
+## Scripts
 ### prep_data_regional
 #### lines 9-28
 import any packages I will need as this is the first script the Rmd runs
