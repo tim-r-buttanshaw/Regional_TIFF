@@ -14,6 +14,33 @@ These are there to distinguish between the code which is for the summary landing
 
 To create the regional accounts if the data is in the fomrat you expect then all you need to do it to run the .Rmd files in each of the folders (making sure that the source references for the scripts are correct). I will outline below what is happening in each of the scripts and where they fit in the process of running the regional accounts.
 
+## Rmd files
+### TIFF in the regions of England.Rmd
+#### YAML header lines 1 - 22
+**title** gives the title in the preview - this has to be specifiecd when sending .txt file to publishing <br>
+**date** shows the date of publication in the preview, just set for the system date currently <br>
+**output** controls the output format <br>
+**params** here you can set what paramteres you want to provide before *kntting the document* (runnning the script and making an output) <br>
+**working_year** this is the account year that is being worked on, usualy *current_year - 1* but it means you can run the account for any year providing you have data 
+
+* label: what you see when you choose the **working_year** before knitting
+* value: value by default if no option is chosen, set at 2021 because that is the accounts year that this script was made for initially
+* input: *slider* but this can be changed to *select* or a manual input
+* min/max/step: minimum/maximum/step size value for the slider
+
+**pubdate** this is the publication date of the document, used for appending file saves on final runs
+
+* label: what you see when you choose the **pubdate** before knitting
+* input: *date* this brings up a calendar interface to select a date before knitting
+* value: this is system date by default, should be set to the scheduled publication date when running to produce final outputs
+
+**run** this chooses the type of run of the document you are doing, generally this will be a development run except to produce the files to send to publishing
+
+* label: what you see when you choose the **run** before knitting
+* input: *select* this gives a dropdown list to choose options from
+* value: set to development by default as this doesn't produce all the extra files needed for publication 
+* choices: this gives the choices for the dropdown menu when using select
+
 ## Scripts
 ### prep_data_regional.R
 #### lines 9-28
