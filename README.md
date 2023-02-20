@@ -45,8 +45,13 @@ To create the regional accounts if the data is in the fomrat you expect then all
 **25 - 43** install any packages which will be needed generally, packages specific to scripts will be sourced in the scripts <br>
 **45** set the code chucks by default not to be printed as well as the outputs<br>
 **47 - 49** set the *working_year* and the *previous_year* based on the paramater ***working_year*** set before knitting<br>
-**51 - 55** create the variable *date_pub* to be a readable version of the publication date based on the parameter ***pubdate*** which can be appended to file names
+**51 - 55** create the variable *date_pub* to be a readable version of the publication date based on the parameter ***pubdate*** which can be appended to file names<br>
 **58 - 61** ***source*** in the scripts needed to create the figures and tables etc. for the publication
+
+#### lines 64 - 81
+for now this is all manually entered as text before being knit and is the intro and key messages for the publication
+
+####
 
 ## Scripts
 ### prep_data_regional.R
