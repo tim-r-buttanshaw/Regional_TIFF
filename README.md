@@ -48,8 +48,7 @@ create a set of lookup functions to be run on data sets which have a column of i
 (generic lookup and replace function lines 67 - 77 but it's not really relevant just potentially useful to create other specific ones and too many variables)
 
 #### lines 80 - 104
-**80 - 88** a function to find the 3 itl1 regions which had the highest value for a particular account item (can be input or output) in the account year
-
+**80 - 88** a function to find the 3 itl1 regions which had the highest value for a particular account item (can be input or output) in the account year <br.>
 **90 - 104** using the top three itl1 regions found above, create a table with them across the top and years going down for the last 6 years (including account year)
 
 #### lines 106 - 118
