@@ -72,11 +72,11 @@ We want to improve our understanding of how people use our TIFF publications and
 
 ## Section 1: Key messages
 
-* TIFF in England in 2021 was £4,223 million, an increase of £636 million (18%) from 2020. Both crop and livestock output in 2021 increased meaning that although costs increased TIFF also increased to be the second highest in real terms since 2000
+* 
 
-* TIFF increased in 6 of the 8 regions and decreased in 2. Where TIFF increased, the average increase was 21%, where it fell, TIFF fell by <1% and 8%.
+* 
 
-* The East of England and the East Midlands contributed the most, of the ITL1 regions, to TIFF in England in 2021, contributing 38% between them. The 2 ITL1 regions with the lowest contribution to TIFF in England in 2021 were the North East and the North West which between them contributed 10%.
+* 
 
 #### Figure 1.1: TIFF in `r working_year` in each ITL1 region of England (£ million)
 ```{r}
@@ -88,11 +88,11 @@ itl1_code_to_name(tiff_itl1) %>%
 ```
 {barchart}
 
-* The highest TIFF in the regions came from the East of England, contributing £665 million increasing by £200 million from 2020. The East of England has consistently had the highest TIFF of the regions over the past 10 years except in 2017 and 2014 where is was second.
+* 
 
-* The lowest overall TIFF was from the North East, contributing £190 million. The North East has had the lowest TIFF of the regions every year for the last 10 years. 
+*  
 
-* The largest change in TIFF from 2020 was also in the East of England while the second largest change was in the East Midlands, where TIFF increased by £191 million to £758 million. This increase has moved it from being the third highest TIFF of the regions in 2020 to the second highest in 2021.
+* 
 
 #### Figure 1.2: TIFF in `r working_year` per hectare in each ITL1 region of England (£/ha)
 ```{r}
@@ -104,9 +104,9 @@ itl1_code_to_name(tiff_per_ha_itl1) %>%
 ```
 {barchart}
 
-* The highest TIFF per hectare in England in 2021 was in the East Midlands which had a TIFF per hectare of £630.This was an increase of £159 per hectare (34%) from 2020.
+* 
 
-* The biggest mover between absolute TIFF and TIFF per hectare was the South West, which had the 3rd highest TIFF of any of the ITL1 regions of England but had only the 6th highest TIFF per hectare.
+* 
 
 ## Section 2: Outputs and subsidies
 Below is a summary of the key points regarding outputs and subsidies at the ITL1 level. Any comparison made here between current and past years is made using current prices data as this is widely considered to be the most intuitive and helpful for year on year change.
@@ -133,9 +133,9 @@ kable(top3_crops_itl1_across)
 ```
 {barchart}
 
-* The East of England has had the largest total crop output value of any ITL1 region of England for the past 6 years. In 2021 it had a total crop output of £2,334 million, an increase of £457 million (24%) from 2020. 2020 was an abnormal year for crop yield so comparing to the more normal 2019, there was an increase of 10% to 2021.
+* 
 
-* The East Midlands has, for the past 6 years, had the second highest crop output value of the ITL1 regions of England, in 2021 it had a crop output of £1,858 million. This region has produced on average 80% of the total crop output of the ITL1 region with the highest, the East of England.
+* 
 
 $D
 [Download 'Total Income from Farming in the regions of England at ITL1' (ODS, MB)]()
@@ -149,9 +149,9 @@ kable(top3_livestock_itl1_across)
 ```
 {barchart}
 
-* The South West has had the largest total livestock output value of any ITL1 region of England for the past 6 years. In 2021 it had a total livestock output of £2,575 million, an increase of £130 million (5%) from 2020.
+* 
 
-* The North West has, for the past 6 years, had the second highest livestock output value of the ITL1 regions of England, in 2021 it had a livestock output of £1,616 million. This region has produced on average 60% of the total livestock output of the ITL1 region with the highest, the North West.
+* 
 
 $D
 [Download 'Total Income from Farming in the regions of England at ITL1' (ODS, MB)]()
