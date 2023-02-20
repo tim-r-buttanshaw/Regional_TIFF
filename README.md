@@ -52,4 +52,4 @@ create a set of lookup functions to be run on data sets which have a column of i
 **90 - 104** using the top three itl1 regions found above, create a table with them across the top and years going down for the last 6 years (including account year)
 
 #### lines 106 - 118
-a function to create a tibble for a specific account item over the past 2 years for each itl1 region. This can then be converted using kable into a table which gov.uk can make into an interactive barchart i.e. [https://www.gov.uk/government/statistics/total-income-from-farming-for-the-regions-of-england/total-income-from-farming-in-the-regions-of-england-in-2021] figures 1.1 and 1.2 
+a function to create a tibble for a specific account item over the past 2 years for each itl1 region. This can then be converted using kable into a table which gov.uk can make into an interactive barchart i.e. figures 1.1 and 1.2 here: https://www.gov.uk/government/statistics/total-income-from-farming-for-the-regions-of-england/total-income-from-farming-in-the-regions-of-england-in-2021
