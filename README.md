@@ -21,25 +21,32 @@ To create the regional accounts if the data is in the fomrat you expect then all
 **date** shows the date of publication in the preview, just set for the system date currently <br>
 **output** controls the output format <br>
 **params** here you can set what paramteres you want to provide before *kntting the document* (runnning the script and making an output) <br>
-**working_year** this is the account year that is being worked on, usualy *current_year - 1* but it means you can run the account for any year providing you have data 
+* **working_year** this is the account year that is being worked on, usualy *current_year - 1* but it means you can run the account for any year providing you have data 
 
-* label: what you see when you choose the **working_year** before knitting
-* value: value by default if no option is chosen, set at 2021 because that is the accounts year that this script was made for initially
-* input: *slider* but this can be changed to *select* or a manual input
-* min/max/step: minimum/maximum/step size value for the slider
+  * label: what you see when you choose the **working_year** before knitting
+  * value: value by default if no option is chosen, set at 2021 because that is the accounts year that this script was made for initially
+  * input: *slider* but this can be changed to *select* or a manual input
+  * min/max/step: minimum/maximum/step size value for the slider
 
-**pubdate** this is the publication date of the document, used for appending file saves on final runs
+* **pubdate** this is the publication date of the document, used for appending file saves on final runs
 
-* label: what you see when you choose the **pubdate** before knitting
-* input: *date* this brings up a calendar interface to select a date before knitting
-* value: this is system date by default, should be set to the scheduled publication date when running to produce final outputs
+  * label: what you see when you choose the **pubdate** before knitting
+  * input: *date* this brings up a calendar interface to select a date before knitting
+  * value: this is system date by default, should be set to the scheduled publication date when running to produce final outputs
 
-**run** this chooses the type of run of the document you are doing, generally this will be a development run except to produce the files to send to publishing
+* **run** this chooses the type of run of the document you are doing, generally this will be a development run except to produce the files to send to publishing
 
-* label: what you see when you choose the **run** before knitting
-* input: *select* this gives a dropdown list to choose options from
-* value: set to development by default as this doesn't produce all the extra files needed for publication 
-* choices: this gives the choices for the dropdown menu when using select
+  * label: what you see when you choose the **run** before knitting
+  * input: *select* this gives a dropdown list to choose options from
+  * value: set to development by default as this doesn't produce all the extra files needed for publication 
+  * choices: this gives the choices for the dropdown menu when using select
+
+#### setup lines 24 - 62
+**25 - 43** install any packages which will be needed generally, packages specific to scripts will be sourced in the scripts <br>
+**45** set the code chucks by default not to be printed as well as the outputs<br>
+**47 - 49** set the *working_year* and the *previous_year* based on the paramater ***working_year*** set before knitting<br>
+**51 - 55** create the variable *date_pub* to be a readable version of the publication date based on the parameter ***pubdate*** which can be appended to file names
+**58 - 61** ***source*** in the scripts needed to create the figures and tables etc. for the publication
 
 ## Scripts
 ### prep_data_regional.R
