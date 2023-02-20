@@ -49,7 +49,9 @@ create a set of lookup functions to be run on data sets which have a column of i
 
 #### lines 80 - 104
 **80 - 88** a function to find the 3 itl1 regions which had the highest value for a particular account item (can be input or output) in the account year
+
 **90 - 104** using the top three itl1 regions found above, create a table with them across the top and years going down for the last 6 years (including account year)
 
 #### lines 106 - 118
-a function to create a tibble for a specific account item over the past 2 years for each itl1 region. This can then be converted using kable into a table which gov.uk can make into an interactive barchart i.e. figures 1.1 and 1.2 here: https://www.gov.uk/government/statistics/total-income-from-farming-for-the-regions-of-england/total-income-from-farming-in-the-regions-of-england-in-2021
+a function to create a tibble for a specific account item over the past 2 years for each itl1 region. This can then be converted using kable into a table which gov.uk can make into an interactive barchart i.e. figures 1.1 and 1.2 [here](https://www.gov.uk/government/statistics/total-income-from-farming-for-the-regions-of-england/total-income-from-farming-in-the-regions-of-england-in-2021)
+
