@@ -1,6 +1,8 @@
 # Regional_TIFF
 Code used to create the publication Total Income from Farming in the Regions of England 
 
+# This is a work in progress and as such not all the information for the scripts is here
+
 ## Layout of this repo
 There are 2 folders in this repo:
 
@@ -16,7 +18,7 @@ To create the regional accounts if the data is in the fomrat you expect then all
 
 ## Rmd files
 ### TIFF in the regions of England.Rmd
-#### YAML header lines 1 - 22
+#### YAML header: lines 1 - 22
 **title** gives the title in the preview - this has to be specifiecd when sending .txt file to publishing <br>
 **date** shows the date of publication in the preview, just set for the system date currently <br>
 **output** controls the output format <br>
@@ -41,7 +43,7 @@ To create the regional accounts if the data is in the fomrat you expect then all
   * value: set to development by default as this doesn't produce all the extra files needed for publication 
   * choices: this gives the choices for the dropdown menu when using select
 
-#### setup lines 24 - 62
+#### setup: lines 24 - 62
 **25 - 43** install any packages which will be needed generally, packages specific to scripts will be sourced in the scripts <br>
 **45** set the code chucks by default not to be printed as well as the outputs<br>
 **47 - 49** set the *working_year* and the *previous_year* based on the paramater ***working_year*** set before knitting<br>
