@@ -53,7 +53,28 @@ To create the regional accounts if the data is in the fomrat you expect then all
 #### lines 64 - 81
 for now this is all manually entered as text before being knit and is the intro and key messages for the publication
 
-####
+#### lines 81 - 96 Figure 1.1
+produce a kable (table fomrat which works for gov.uk) of the *tiff_itl1* tibble (created in **lines 10 - 16** in the graphs_main_regional.R file) aranged from largest to smallest <br>
+these bullet points are currently filled in manually 
+
+#### lines 97 - 110 Figure 1.2
+produce a kable (table fomrat which works for gov.uk) of the *tiff_per_ha_itl1* tibble (created in **lines 18 - 24** in the graphs_main_regional.R file) aranged from largest to smallest <br>
+these bullet points are currently filled in manually 
+
+#### lines 116 - 138 Figure 2.1
+creates the *!!x* format gov.uk needs for a chart, the chart here is created in **lines 31 - 58** in the graphs_main_regional.R file <br>
+these bullet points are currently filled in manually
+
+#### lines 130 - 138 & 146 - 154
+in these two sections a kable is created of the tibbles created in **lines 61 & 73** of graphs_main_regional.R respectively which in turn use the top 3 finder function created in **lines 81 - 104** of functions_regional.R <br>
+these bullet points are currently filled in manually
+
+#### lines 162 - 170
+here create a kable of the tiblle *past_2_years_other_outputs_years_across* which was created in **lines 76 - 85** of graphs_main_regional.R <br>
+no commentary given typically
+
+#### lines 187 - 193
+creates the *!!x* format gov.uk needs for a chart, the chart here is created in **lines 89 - 113** in the graphs_main_regional.R file <br>
 
 ## Scripts
 ### prep_data_regional.R
